@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import com.google.common.base.Preconditions;
+import lombok.RequiredArgsConstructor;
+import org.example.service.HelloService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/hello")
+@RequiredArgsConstructor
 class HelloController {
+
+  public final HelloService service;
 
   @GetMapping
   @ResponseStatus(HttpStatus.CREATED)
@@ -28,5 +33,11 @@ class HelloController {
   public String sayHelloToName(@PathVariable("name") String name) {
     Preconditions.checkArgument(name.length()>3);
     return String.format("Hello %s!",name);
+  }
+  @GetMapping("/find/{id}")
+  @ResponseStatus(HttpStatus.CREATED)
+  public String findById(@PathVariable("id") String id) {
+    String response = service.find(id);
+    return String.format("User %s found!", response);
   }
 }
