@@ -1,7 +1,6 @@
 package org.example.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
