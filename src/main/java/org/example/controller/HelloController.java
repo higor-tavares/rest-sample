@@ -2,11 +2,13 @@ package org.example.controller;
 
 import com.google.common.base.Preconditions;
 import lombok.RequiredArgsConstructor;
+import org.example.domain.HelloObject;
 import org.example.service.HelloService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 /**
@@ -39,5 +41,10 @@ class HelloController {
   public String findById(@PathVariable("id") String id) {
     String response = service.find(id);
     return String.format("User %s found!", response);
+  }
+  @GetMapping("/get")
+  @ResponseStatus(HttpStatus.CREATED)
+  public @ResponseBody HelloObject get() {
+    return service.get();
   }
 }
